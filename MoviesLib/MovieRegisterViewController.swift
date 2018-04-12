@@ -114,19 +114,14 @@ extension MovieRegisterViewController: UIImagePickerControllerDelegate, UINaviga
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.image = image
+            let size = CGSize(width: image.size.width*0.2, height: image.size.height*0.2)
+            UIGraphicsBeginImageContext(size)
+            image.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+            self.image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
             
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            ivPoster.image = image
+            ivPoster.image = self.image
         }
         
         dismiss(animated: true, completion: nil)
