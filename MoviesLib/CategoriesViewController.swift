@@ -80,7 +80,18 @@ extension CategoriesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = categories[indexPath.row].name
+        let category = categories[indexPath.row]
+        
+        cell.textLabel?.text = category.name
+        if let movieCategories = movie?.categories {
+            if movieCategories.contains(category) {
+                cell.accessoryType = .checkmark
+            }
+            else
+            {
+                 cell.accessoryType = .none
+            }
+        }
         return cell
     }
 }
